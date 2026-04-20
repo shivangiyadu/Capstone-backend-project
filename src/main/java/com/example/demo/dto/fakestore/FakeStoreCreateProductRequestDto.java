@@ -1,4 +1,4 @@
-package com.example.demo.dto;
+package com.example.demo.dto.fakestore;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -22,5 +22,19 @@ public class FakeStoreCreateProductRequestDto {
         fakeStoreCreateProductRequestDto.image = product.getImageUrl();
 
         return fakeStoreCreateProductRequestDto;
+    }
+    public Product toProduct() {
+        Product product1 = new Product();
+        product1.setId(this.getId());
+        product1.setTitle(this.getTitle());
+        product1.setDescription(this.getDescription());
+        product1.setImageUrl(this.getImage());
+        //product1.setCategoryName(this.getCategory());
+//        Category category1 = new Category();
+//        category1.setName(category);
+//        product1.setCategory(category1);
+//        product1.setPrice(this.getPrice());
+
+        return product1;
     }
 }

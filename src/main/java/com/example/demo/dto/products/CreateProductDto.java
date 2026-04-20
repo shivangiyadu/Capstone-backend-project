@@ -1,4 +1,4 @@
-package com.example.demo.dto;
+package com.example.demo.dto.products;
 import lombok.Getter;
 import lombok.Setter;
 import com.example.demo.models.Product;
@@ -12,6 +12,7 @@ public class CreateProductDto {
     private String imageUrl;
     private String categoryName;
 
+
     public static CreateProductDto fromProduct(Product product) {
         CreateProductDto responseDto = new CreateProductDto();
         responseDto.setId(product.getId());
@@ -21,5 +22,16 @@ public class CreateProductDto {
         responseDto.setImageUrl(product.getImageUrl());
 
         return responseDto;
+    }
+    public Product toProduct()
+    {
+        Product product=new Product();
+        product.setTitle(this.title);
+        product.setDescription(this.description);
+        product.setPrice(this.price);
+        product.setImageUrl(this.imageUrl);
+        product.setCategoryName(this.categoryName);
+        return product;
+
     }
 }

@@ -1,8 +1,7 @@
-package com.example.demo.dto;
+package com.example.demo.dto.products;
 import com.example.demo.models.Product;
 import lombok.Getter;
 import lombok.Setter;
-import com.example.demo.models.Product;
 
 
 @Getter

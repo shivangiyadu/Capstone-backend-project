@@ -1,10 +1,14 @@
 package com.example.demo.services;
 
-import com.example.demo.dto.FakeStoreCreateProductRequestDto;
-import com.example.demo.dto.FakeStoreGetProductResponseDto;
+import com.example.demo.dto.fakestore.FakeStoreCreateProductRequestDto;
+import com.example.demo.dto.fakestore.FakeStoreGetProductResponseDto;
 import com.example.demo.models.Product;
 import org.springframework.context.annotation.Primary;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.client.RestTemplate;
 import java.util.List;
 import java.util.ArrayList;
@@ -54,14 +58,35 @@ public class ProductServiceFakestoreImpl implements ProductService {
         );
         List<FakeStoreGetProductResponseDto> responseDtoList=
                 Stream.of(response).toList();
-
         List<Product> products=new ArrayList<>();
-
         for(FakeStoreGetProductResponseDto fakeStoreGetProductResponseDto:responseDtoList)
         {
             products.add(fakeStoreGetProductResponseDto.toProduct());
         }
-
         return products;
     }
+    @Override
+    public Product partialUpdateProduct(Long productId, Product product) {
+
+        HttpEntity<FakeStoreCreateProductRequestDto> requestEntity =
+                new HttpEntity<>(FakeStoreCreateProductRequestDto.fromProduct(product));
+
+        ResponseEntity<FakeStoreGetProductResponseDto> responseEntity =
+                restTemplate.exchange(
+                        "https://fakestoreapi.com/products/" + productId, // ✅ slash added
+                        HttpMethod.PATCH,
+                        requestEntity,
+                        FakeStoreGetProductResponseDto.class
+                );
+
+        return responseEntity.getBody().toProduct();
+
+
+//        restTemplate.put(
+//                "https://fakestoreapi.com/products/" + productId,
+//                FakeStoreCreateProductRequestDto.fromProduct(product)
+//        );
+//        return product
+    }
+
 }
