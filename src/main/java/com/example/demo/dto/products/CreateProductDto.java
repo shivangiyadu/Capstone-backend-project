@@ -1,4 +1,5 @@
 package com.example.demo.dto.products;
+import com.example.demo.models.Category;
 import lombok.Getter;
 import lombok.Setter;
 import com.example.demo.models.Product;
@@ -10,7 +11,7 @@ public class CreateProductDto {
     private String description;
     private Double price;
     private String imageUrl;
-    private String categoryName;
+    private Category category;
 
 
     public static CreateProductDto fromProduct(Product product) {
@@ -30,7 +31,11 @@ public class CreateProductDto {
         product.setDescription(this.description);
         product.setPrice(this.price);
         product.setImageUrl(this.imageUrl);
-        product.setCategoryName(this.categoryName);
+
+        Category category=new Category();
+
+        category.setName(this.category.getName());
+        product.setCategory(category);
         return product;
 
     }

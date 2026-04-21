@@ -82,6 +82,7 @@ public class ProductController {
         return "siihsihs";
     }
 
+    @PutMapping
     public void replaceProduct() {
     }
     @ExceptionHandler(Exception.class)

@@ -1,5 +1,6 @@
 package com.example.demo.dto.fakestore;
 
+import com.example.demo.models.Category;
 import lombok.Getter;
 import lombok.Setter;
 import com.example.demo.models.Product;
@@ -12,12 +13,12 @@ public class FakeStoreCreateProductRequestDto {
     private double price;
     private String image;
     private String description;
-    private String category;
+    private Category category;
     public static FakeStoreCreateProductRequestDto fromProduct(Product product) {
         FakeStoreCreateProductRequestDto fakeStoreCreateProductRequestDto = new FakeStoreCreateProductRequestDto();
         fakeStoreCreateProductRequestDto.title = product.getTitle();
         fakeStoreCreateProductRequestDto.description = product.getDescription();
-        fakeStoreCreateProductRequestDto.category = product.getCategoryName();
+        fakeStoreCreateProductRequestDto.category = product.getCategory();
         fakeStoreCreateProductRequestDto.price = product.getPrice();
         fakeStoreCreateProductRequestDto.image = product.getImageUrl();
 

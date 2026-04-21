@@ -3,8 +3,10 @@ package com.example.demo.advices;
 import com.example.demo.dto.ErrorResponseDto;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestController;
 
 @ControllerAdvice
+@RestController
 public class ExceptionAdvices {
 
     @ExceptionHandler(RuntimeException.class)
