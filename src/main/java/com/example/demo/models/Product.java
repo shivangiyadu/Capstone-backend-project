@@ -10,12 +10,12 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-public class Product {
-    @Id
-    private Long id;
+public class Product extends BaseModel{
+//    @Id
+//    private Long id;
     private String title;
     private String description;
-    private double price;
+    private Double price;
     private String imageUrl;
     @ManyToOne
     private  Category category;

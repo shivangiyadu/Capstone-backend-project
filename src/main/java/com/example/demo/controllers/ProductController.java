@@ -16,7 +16,7 @@ public class ProductController {
 
     private ProductService productService;
 
-    public ProductController(@Qualifier("fakeStoreProductService") ProductService productService)
+    public ProductController(@Qualifier("dbProductService") ProductService productService)
 
 //     public ProductController(@Qualifier("fakeStore") ProductService productService)
     {
@@ -74,12 +74,13 @@ public class ProductController {
     }
 
     @ExceptionHandler(RuntimeException.class)
-    public String handleRuntimeException(RuntimeException e)
+    public ErrorResponseDto  handleRuntimeException(RuntimeException e)
     {
+        e.printStackTrace();
         ErrorResponseDto dto=new ErrorResponseDto();
         dto.setStatus("Error");
         dto.setMessage(e.getMessage());
-        return "siihsihs";
+        return dto;
     }
 
     @PutMapping
