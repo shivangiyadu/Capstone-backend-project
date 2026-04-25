@@ -13,4 +13,3 @@ public class DemoApplication {
 }
 
 
-//this file starts the server, without this file project wont run

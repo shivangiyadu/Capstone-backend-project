@@ -1,8 +1,11 @@
 package com.example.demo.models;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import java.util.List;
 
@@ -12,14 +15,20 @@ import java.util.List;
 
 public class Category extends BaseModel {
 
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private Long id;
+    @Column(nullable = false, unique = true)
     private String name;
+
+    @Basic(fetch = FetchType.EAGER )
     private String description;
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private List<Product> featuredProducts;
 
-    @OneToMany(mappedBy="category")
-    private List<Product> allPrducts;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy="category",cascade = CascadeType.ALL)
+    @Fetch(FetchMode.SUBSELECT)
+    private List<Product> allProducts;
+
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private SubCategory subCategory;
+
 }
